@@ -4,7 +4,7 @@
 int main()
 {
 	struct node* root = NULL;
-	int menu = -1, value, i, cout=0;
+	int menu = -1, value, i, cout=0, buf=0;
 	while (menu != 0)
 	{
 		printf("1 add new \n");
@@ -38,8 +38,10 @@ int main()
 		}
 		else if (menu == 5)
 		{
-			cout=0;
-			printf("Count of equal: %d\n", count_eq(root, cout));
+			cout=0, buf=0;
+			count_eq(root, cout, &buf);
+			buf++;
+			printf("Count of equal: %d\n", buf);
 		}
 		else if (menu == 0)
 		{

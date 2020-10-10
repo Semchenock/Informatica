@@ -19,5 +19,5 @@ enqueue(struct queue** head, struct queue** tail, struct node* value);
 struct node* dequeue(struct queue** head, struct queue** tail);
 bfs(struct node* root);
 search(struct node* root, const int num);
-count_eq(struct node* root, int cout);
+count_eq(struct node* root, int cout, int *buf);
 #endif 

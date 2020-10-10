@@ -116,7 +116,7 @@ search(struct node* root, const int num)
 			if (value->value == num)
 			{
 				printf("Level = %d\n", cout);
-				return 0;
+				return cout;
 			}
 			if (value->left)
 				enqueue(&new_head, &new_tail, value->left);
@@ -130,7 +130,7 @@ search(struct node* root, const int num)
 	printf("There is no searched element\n");
 	return 0;
 }
-count_eq(struct node* root, int cout)
+count_eq(struct node* root, int cout, int *buf)
 {
 	if (root == NULL)
 	{
@@ -142,9 +142,18 @@ count_eq(struct node* root, int cout)
 		if (root->left->value == root->value)
 			cout++;
 	}
+	if ((root->left == NULL) || (root->left->value != root->value))
+	{
+		//printf("%d\n", cout);
+		if (cout > *buf)
+			*buf = cout;
+		printf("%d\n", *buf);
+		cout = 0;
+	}
+	
 	if (root->left != NULL)
-		cout=count_eq(root->left, cout);
+		cout=count_eq(root->left, cout, buf);
 	if (root->right != NULL)
-		cout=count_eq(root->right, cout);
+		cout=count_eq(root->right, cout, buf);
 	return cout;
 }
