@@ -132,28 +132,48 @@ search(struct node* root, const int num)
 }
 count_eq(struct node* root, int cout, int *buf)
 {
-	if (root == NULL)
+	int* all;
+	int n = 0, i = 0, j = 0, max = 0;
+	all = (int*)malloc(sizeof(int));
+	struct queue* head;
+	struct queue* tail;
+	head = NULL;
+	tail = NULL;
+	enqueue(&head, &tail, root);
+	while (head != NULL)
 	{
-		printf("Binary tree is empty!");
-		return 0;
+		struct queue* new_head;
+		struct queue* new_tail;
+		new_head = NULL;
+		new_tail = NULL;
+		while (head != NULL)
+		{
+			struct node* value;
+			value = dequeue(&head, &tail);
+			if (value == NULL)
+			{
+				printf("Binary tree is empty!\n");
+				return 0;
+			}
+			if (value->left)
+				enqueue(&new_head, &new_tail, value->left);
+			if (value->right)
+				enqueue(&new_head, &new_tail, value->right);
+			for (i = 0; i < n; i++)
+			{
+				if (all[i] == value->value)
+					j++;
+			}
+			if (j > max)
+				max = j;
+			j = 0;
+			all = (int*)realloc(all, (n + 1) * sizeof(int));
+			all[n] = value->value;
+			n++;
+		}
+		head = new_head;
+		tail = new_tail;
 	}
-	if (root->left != NULL)
-	{
-		if (root->left->value == root->value)
-			cout++;
-	}
-	if ((root->left == NULL) || (root->left->value != root->value))
-	{
-		//printf("%d\n", cout);
-		if (cout > *buf)
-			*buf = cout;
-		printf("%d\n", *buf);
-		cout = 0;
-	}
-	
-	if (root->left != NULL)
-		cout=count_eq(root->left, cout, buf);
-	if (root->right != NULL)
-		cout=count_eq(root->right, cout, buf);
-	return cout;
+	max++;
+	return max;
 }

@@ -11,7 +11,7 @@ int main()
 		printf("2 breadth first search \n");
 		printf("3 depth first search \n");
 		printf("4 search number \n");
-		printf("5 count equal \n");
+		printf("5 max count equal \n");
 		printf("0 exit \n");
 		printf("Enter number: ");
 		scanf("%d", &menu);
@@ -38,10 +38,7 @@ int main()
 		}
 		else if (menu == 5)
 		{
-			cout=0, buf=0;
-			count_eq(root, cout, &buf);
-			buf++;
-			printf("Count of equal: %d\n", buf);
+			printf("Max count of equal: %d\n", count_eq(root));
 		}
 		else if (menu == 0)
 		{
